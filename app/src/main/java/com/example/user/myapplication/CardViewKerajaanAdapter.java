@@ -1,13 +1,18 @@
 package com.example.user.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +24,14 @@ import java.util.ArrayList;
 public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKerajaanAdapter.CardViewViewHolder> {
 
     public CardViewKerajaanAdapter(Context context) {
+
         this.context = context;
     }
 
     private Context context;
 
     public ArrayList<Kerajaan> getListKerajaan() {
+
         return listKerajaan;
     }
 
@@ -42,7 +49,7 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewViewHolder cardViewViewHolder, int i) {
+    public void onBindViewHolder(@NonNull CardViewViewHolder cardViewViewHolder, final int i) {
         Kerajaan k = getListKerajaan().get(i);
         Glide.with(context)
                 .load(k.getPhoto())
@@ -57,12 +64,37 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
                 Toast.makeText(context, "Favorite "+getListKerajaan().get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         }));
+
         cardViewViewHolder.btnShare.setOnClickListener(new CustomOnItemClickListener(i, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
                 Toast.makeText(context, "Share "+getListKerajaan().get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         }));
+
+//        cardViewViewHolder.imgPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent a = new Intent(context.getApplicationContext(), DetailListActivity.class);
+//                a.putExtra("name", getListKerajaan().get(i).getName());
+//                a.putExtra("deskrip",getListKerajaan().get(i).getDeskrip());
+//                a.putExtra("gambar",getListKerajaan().get(i).getPhoto());
+//                context.startActivity(a);
+//            }
+//        });
+
+        cardViewViewHolder.detail_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(context.getApplicationContext(), DetailListActivity.class);
+                a.putExtra("name", getListKerajaan().get(i).getName());
+                a.putExtra("deskrip",getListKerajaan().get(i).getDeskrip());
+                a.putExtra("gambar",getListKerajaan().get(i).getPhoto());
+                context.startActivity(a);
+            }
+        });
+
+
     }
 
     @Override
@@ -74,6 +106,7 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
         ImageView imgPhoto;
         TextView tvName, tvRemarks;
         Button btnFavorite, btnShare;
+        CardView detail_list;
 
         public CardViewViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +115,7 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
             tvRemarks = itemView.findViewById(R.id.tv_item_remarks);
             btnFavorite = itemView.findViewById(R.id.btn_set_favorite);
             btnShare = itemView.findViewById(R.id.btn_set_share);
+            detail_list = itemView.findViewById(R.id.card_view);
         }
     }
 }
