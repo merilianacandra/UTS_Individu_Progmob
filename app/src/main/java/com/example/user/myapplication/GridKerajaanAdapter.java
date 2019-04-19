@@ -57,8 +57,6 @@ public class GridKerajaanAdapter extends RecyclerView.Adapter<GridKerajaanAdapte
 
             }
         });
-
-
     }
 
     @Override

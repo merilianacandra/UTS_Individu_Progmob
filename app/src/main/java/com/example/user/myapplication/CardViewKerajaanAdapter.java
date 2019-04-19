@@ -72,17 +72,6 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
             }
         }));
 
-//        cardViewViewHolder.imgPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent a = new Intent(context.getApplicationContext(), DetailListActivity.class);
-//                a.putExtra("name", getListKerajaan().get(i).getName());
-//                a.putExtra("deskrip",getListKerajaan().get(i).getDeskrip());
-//                a.putExtra("gambar",getListKerajaan().get(i).getPhoto());
-//                context.startActivity(a);
-//            }
-//        });
-
         cardViewViewHolder.detail_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +82,6 @@ public class CardViewKerajaanAdapter extends RecyclerView.Adapter<CardViewKeraja
                 context.startActivity(a);
             }
         });
-
 
     }
 
