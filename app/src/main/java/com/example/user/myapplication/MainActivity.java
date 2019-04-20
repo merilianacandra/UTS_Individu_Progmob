@@ -27,9 +27,11 @@ public class MainActivity extends AppCompatActivity {
         rvCategory = findViewById(R.id.rv_category);
         rvCategory.setHasFixedSize(true);
 
-        list.addAll(KerajaanData.getListData());
-        setActionBarTitle("Mode List");
-        showRecyclerList();
+        list = new ArrayList<>();
+
+//        list.addAll(KerajaanData.getListData());
+//        setActionBarTitle("Mode List");
+//        showRecyclerList();
 
         if (savedInstanceState == null) {
             setActionBarTitle("Mode List");
